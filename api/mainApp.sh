@@ -11,6 +11,6 @@ fi
 cd selene-ah-backend
 sudo npm install
 source ../api/.env
-npm run db:migrate
+npm run db:migrate:seed
 npm start
 echo "Api is up"

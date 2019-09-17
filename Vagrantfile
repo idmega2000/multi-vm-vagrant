@@ -13,6 +13,12 @@ Vagrant.configure("2") do |config|
     api.vm.network "forwarded_port", guest: 3000, host: 3000,
     group: "vagrant", mount_options:["dmode=775,fmode=664"]
 
+    api.vm.provider "virtualbox" do |vb|
+      vb.name = "api-vm"
+      vb.gui = false
+      vb.memory = "1024"
+    end
+
     api.vm.provision "shell", path: "api/provision.sh"
   end
 
@@ -23,6 +29,12 @@ Vagrant.configure("2") do |config|
     client.vm.synced_folder ".", "/home/vagrant/allVm"
     client.vm.network "forwarded_port", guest: 8080, host: 8080,
     group: "vagrant", mount_options:["dmode=775,fmode=664"]
+
+    client.vm.provider "virtualbox" do |vb|
+      vb.name = "client"
+      vb.gui = false
+      vb.memory = "1024"
+    end
 
   client.vm.provision "shell", path: "client/provision.sh"
   end
